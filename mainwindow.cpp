@@ -6,6 +6,7 @@
 #include <QSqlQueryModel>
 #include <QMessageBox>
 #include "dialog.h"
+#include "menu.h"
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -26,7 +27,7 @@ void MainWindow::on_pushButton_clicked()
     admin ca(ui->lineEdit->text().toInt(),ui->lineEdit_2->text());
      if(ca.authentification()){
 
-   Dialog d;
+   menu d;
    d.exec();
      }
      else{

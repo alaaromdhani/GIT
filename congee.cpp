@@ -57,6 +57,24 @@ bool congee::supprimer(int a){
    return query.exec();
 
 }
+bool congee::modifier(int a){
+
+
+    QSqlQuery query;
+    query.prepare("update conges set cin = ? , date_d = ? , date_e = ?  where id = ?");
+
+    query.addBindValue(cin);
+    query.addBindValue(date_d);
+     query.addBindValue(date_e);
+
+
+   query.addBindValue(a);
+
+
+   return query.exec();
+
+}
+
 QSqlQueryModel * congee::afficher_cin(){
     QSqlQueryModel * model= new QSqlQueryModel();
     model->setQuery("select id from conges;" );

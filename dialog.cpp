@@ -1,9 +1,13 @@
 #include "dialog.h"
+#include "delegate.h"
 #include "ouvrier.h"
 #include "smtp.h"
 #include "congee.h"
 #include "ui_dialog.h"
 #include <QMessageBox>
+#include <QRegExpValidator>
+#define email_rx "^[0-9a-zA-Z]+([0-9a-zA-Z]*[-._+])*[0-9a-zA-Z]+@[0-9a-zA-Z]+([-.][0-9a-zA-Z]+)*([0-9a-zA-Z]*[.])[a-zA-Z]{2,6}$"
+#define nom_rx "^([A-Za-z])+$"
 Dialog::Dialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Dialog)
@@ -11,13 +15,28 @@ Dialog::Dialog(QWidget *parent) :
     ui->setupUi(this);
     ouvrier o;
     congee c;
+
      ui->comboBox->setModel(o.afficher_cin());
     ui->comboBox_2->setModel(o.afficher_cin());
     ui->comboBox_3->setModel(c.afficher_cin());
     connect(ui->pushButton_9, SIGNAL(clicked()),this, SLOT(sendMail()));
-    ui->tableView->setModel(o.afficher());
+    ui->tableView->setModel(o.afficher(this));
  ui->tableView_2->setModel(c.afficher());
+ ui->label_7->setNum(ui->comboBox_2->currentText().toInt());
+ ui->label_9->setNum(ui->comboBox_3->currentText().toInt());
+ ui->label_2->setNum(ui->comboBox->currentText().toInt());
+ ui->lineEdit_2->setValidator( new QIntValidator(0, 99999999, this) );
+ ui->lineEdit_7->setValidator( new QIntValidator(0, 99999999, this) );
+ ui->lineEdit_2->setMaxLength(8);
+ ui->lineEdit_7->setMaxLength(8);
+ QRegExp email(email_rx),nom(nom_rx);
+ QRegExpValidator *valid_e=new QRegExpValidator(email,this);
+  QRegExpValidator *valid_n=new QRegExpValidator(nom,this);
+ ui->lineEdit_5->setValidator(valid_e);
+ ui->lineEdit_3->setValidator(valid_n);
+ ui->lineEdit_4->setValidator(valid_n);
 }
+
 void Dialog::sendMail()
 {
     Smtp* smtp = new Smtp(ui->lineEdit_9->text(), ui->lineEdit_10->text(), ui->lineEdit->text(), ui->lineEdit_8->text().toInt());
@@ -41,8 +60,17 @@ bool Dialog::verif_formdate(){
 }
 
 
-void Dialog::on_pushButton_clicked()
+/*void Dialog::on_pushButton_clicked()
 {
+    QRegularExpression email(email_rx);
+    QRegularExpressionMatch match=email.match(ui->lineEdit_5->text());
+    if(!match.hasMatch()){
+        QMessageBox::critical(nullptr, QObject::tr("ajout insuccessful"),
+                    QObject::tr("invalid email.\n"
+                                "Click Cancel to exit."), QMessageBox::Cancel);
+    }
+    else{
+
     if(verif_form()){
     int a= ui->lineEdit_2->text().toInt();
     QString b= ui->lineEdit_3->text();
@@ -53,10 +81,14 @@ void Dialog::on_pushButton_clicked()
     ouvrier o(a,b,c,d,e,f);
     if(o.ajouter()){
 
-        QMessageBox::critical(nullptr, QObject::tr("ajout successful"),
+        QMessageBox::information(nullptr, QObject::tr("ajout successful"),
                     QObject::tr("ajout successful.\n"
                                 "Click Cancel to exit."), QMessageBox::Cancel);
-        ui->tableView->setModel(o.afficher());
+         ui->tableView->setModel(o.afficher(this));
+        refresh();
+
+
+
 
     }
 
@@ -69,15 +101,17 @@ void Dialog::on_pushButton_clicked()
 
 
     }
+    }
+
 
     //refresh();
-}
+}*/
 
 void Dialog::on_pushButton_2_clicked()
 {
     ouvrier o;
-    ui->tableView->setModel(o.afficher());
-
+    ui->tableView->setModel(o.afficher(this));
+     refresh();
 
 }
 
@@ -107,15 +141,24 @@ void Dialog::on_pushButton_4_clicked()
     int a=ui->label_2->text().toInt();
     ouvrier o;
     if(o.supprimer(a)){
-        ui->tableView->setModel(o.afficher());
+        ui->tableView->setModel(o.afficher(this));
 
     }
+    refresh();
 }
 
 void Dialog::on_pushButton_3_clicked()
 {
 
-     int a=ui->label_8->text().toInt();
+   /* QRegularExpression email(email_rx);
+    QRegularExpressionMatch match=email.match(ui->lineEdit_5->text());
+    if(!match.hasMatch()){
+        QMessageBox::critical(nullptr, QObject::tr("ajout insuccessful"),
+                    QObject::tr("invalid email.\n"
+                                "Click Cancel to exit."), QMessageBox::Cancel);
+    }
+    else {
+    int a=ui->label_8->text().toInt();
      QString b= ui->lineEdit_3->text();
      QString c= ui->lineEdit_4->text();
      QString d= ui->lineEdit_5->text();
@@ -123,9 +166,83 @@ void Dialog::on_pushButton_3_clicked()
      int f= ui->lineEdit_6->text().toInt();
      ouvrier o(a,b,c,d,e,f);
      if(o.modifier(a)){
-         ui->tableView->setModel(o.afficher());
+         ui->tableView->setModel(o.afficher(this));
+         refresh();
 
      }
+    }*/
+    int col1=ui->label_13->text().toInt();
+    QString a=ui->label_11->text();
+    QString f=ui->label_12->text();
+    /*int row =ui->label_14->text().toInt();
+    QModelIndex b1=ui->tableView->model()->index(row,2,QModelIndex());
+    QVariant prenom=b1.data(Qt::DisplayRole);
+    QModelIndex b2=ui->tableView->model()->index(row,3,QModelIndex());
+    QVariant email=b2.data(Qt::DisplayRole);
+    QModelIndex b3=ui->tableView->model()->index(row,4,QModelIndex());
+    QVariant num=b3.data(Qt::DisplayRole);
+    QModelIndex b4=ui->tableView->model()->index(row,5,QModelIndex());
+    QVariant salaire=b4.data(Qt::DisplayRole);
+    ouvrier o(f.toInt(),a,prenom.toString(),email.toString(),num.toInt(),salaire.toInt());
+    if(o.modifier(f.toInt())){
+        QMessageBox::information(this, tr("ligne modifie"), tr(" modifie .\n"));
+
+    }*/
+
+
+
+    if(col1==1){
+        QSqlQuery q;
+        q.prepare("update mycrud set nom = ? where cin = ?;");
+         q.addBindValue(a);
+         q.addBindValue(f);
+         if(q.exec()){
+             QMessageBox::information(this, tr("ligne modifie"), tr("nom modifie .\n"));
+         }
+
+    }
+   if(col1==2){
+        QSqlQuery q;
+        q.prepare("update mycrud set prenom = ? where cin = ?;");
+         q.addBindValue(a);
+         q.addBindValue(f);
+         if(q.exec()){
+             QMessageBox::information(this, tr("ligne modifie"), tr("prenom modifie .\n"));
+         }
+
+    }
+    if(col1==3){
+        QSqlQuery q;
+        q.prepare("update mycrud set email = ? where cin = ?;");
+         q.addBindValue(a);
+         q.addBindValue(f);
+         if(q.exec()){
+             QMessageBox::information(this, tr("ligne modifie"), tr("email modifie .\n"));
+         }
+
+    }
+    if(col1==4){
+        QSqlQuery q;
+        q.prepare("update mycrud set numtel = ? where cin = ?;");
+         q.addBindValue(a);
+         q.addBindValue(f);
+         if(q.exec()){
+             QMessageBox::information(this, tr("ligne modifie"), tr("numero de telephone modifie .\n"));
+         }
+
+    }
+    if(col1==5){
+        QSqlQuery q;
+        q.prepare("update mycrud set salaire = ? where cin = ?;");
+         q.addBindValue(a);
+         q.addBindValue(f);
+         if(q.exec()){
+             QMessageBox::information(this, tr("ligne modifie"), tr("salaire modifie .\n"));
+         }
+
+    }
+        refresh();
+
 }
 
 void Dialog::on_pushButton_5_clicked()
@@ -134,6 +251,7 @@ void Dialog::on_pushButton_5_clicked()
     QDate b= ui->dateEdit->date();
     QDate c= ui->dateEdit_2->date();
 
+
     congee con(a,b,c);
    if(verif_formdate()){
        if(con.ajouter()){
@@ -141,6 +259,7 @@ void Dialog::on_pushButton_5_clicked()
            QMessageBox::critical(nullptr, QObject::tr("ajout successful"),
                        QObject::tr("ajout successful.\n"
                                    "Click Cancel to exit."), QMessageBox::Cancel);
+           refresh();
 
        }
    }
@@ -167,6 +286,7 @@ void Dialog::on_pushButton_6_clicked()
 {
     congee c;
     ui->tableView_2->setModel(c.afficher());
+     refresh();
 }
 
 /*void Dialog::on_comboBox_currentIndexChanged(int index)
@@ -191,7 +311,7 @@ void Dialog::on_pushButton_6_clicked()
 
 void Dialog::on_tableView_activated(const QModelIndex &index)
 {
-    int a=ui->tableView->model()->data(index).toInt();
+    /*int a=ui->tableView->model()->data(index).toInt();
 ui->label_8->setNum(a);
     QSqlQuery q;
     q.prepare("select * from mycrud where cin = ?;");
@@ -205,7 +325,20 @@ ui->label_8->setNum(a);
              ui->lineEdit_7->setText(q.value(4).toString());
              ui->lineEdit_6->setText(q.value(5).toString());
          }
-     }
+     }*/
+    Delegate *d= new Delegate();
+    QWidget * e=d->create(ui->tableView);
+    d->set(e,index);
+    QString a=d->setmodel(e,ui->tableView->model(),index);
+    ui->label_11->setText(a);
+int col=index.row();
+int col1=index.column();
+ QModelIndex b=ui->tableView->model()->index(col,0,QModelIndex());
+ QVariant f=b.data(Qt::DisplayRole);
+ ui->label_12->setText(f.toString());
+ ui->label_13->setNum(col1);
+ ui->label_14->setNum(col);
+
 
 }
 
@@ -214,3 +347,67 @@ void Dialog::on_comboBox_3_activated(const QString &arg1)
     ui->label_9->setText(arg1);
 
 }
+
+void Dialog::on_pushButton_8_clicked()
+{
+    int a=ui->label_9->text().toInt();
+    congee o;
+    if(o.supprimer(a)){
+        ui->tableView_2->setModel(o.afficher());
+ refresh();
+    }
+
+
+}
+void Dialog::refresh(){
+    ouvrier o;
+    congee c;
+     ui->comboBox->setModel(o.afficher_cin());
+    ui->comboBox_2->setModel(o.afficher_cin());
+    ui->comboBox_3->setModel(c.afficher_cin());
+    ui->tableView->setModel(o.afficher(this));
+ ui->tableView_2->setModel(c.afficher());
+ ui->label_7->setNum(ui->comboBox_2->currentText().toInt());
+ ui->label_9->setNum(ui->comboBox_3->currentText().toInt());
+ ui->label_2->setNum(ui->comboBox->currentText().toInt());
+
+  }
+
+void Dialog::on_tableView_2_activated(const QModelIndex &index)
+{
+    int a=ui->tableView_2->model()->data(index).toInt();
+ui->label_10->setNum(a);
+    QSqlQuery q;
+    q.prepare("select * from conges where id = ?;");
+     q.addBindValue(a);
+     if(q.exec()){
+         while(q.next()){
+             ui->comboBox_2->setEditText(q.value(0).toString());
+             ui->dateEdit->setDate(q.value(1).toDate());
+             ui->dateEdit_2->setDate(q.value(2).toDate());
+
+         }
+     }
+     refresh();
+
+}
+
+
+
+
+void Dialog::on_pushButton_7_clicked()
+{
+    int a=ui->label_10->text().toInt();
+    int d=ui->label_7->text().toInt();
+    QDate b= ui->dateEdit->date();
+    QDate c= ui->dateEdit_2->date();
+
+    congee o(d,b,c);
+    if(o.modifier(a)){
+        ui->tableView_2->setModel(o.afficher());
+        refresh();
+
+    }
+}
+
+

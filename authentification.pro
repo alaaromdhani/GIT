@@ -21,24 +21,36 @@ SOURCES += \
     admin.cpp \
     congee.cpp \
     connection.cpp \
+    delegate.cpp \
     dialog.cpp \
     main.cpp \
     mainwindow.cpp \
+    menu.cpp \
     ouvrier.cpp \
+    prod.cpp \
+    produitch.cpp \
+    produitph.cpp \
     smtp.cpp
 
 HEADERS += \
     admin.h \
     congee.h \
     connection.h \
+    delegate.h \
     dialog.h \
     mainwindow.h \
+    menu.h \
     ouvrier.h \
+    prod.h \
+    produitch.h \
+    produitph.h \
     smtp.h
 
 FORMS += \
     dialog.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    menu.ui \
+    prod.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -46,9 +58,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
-    source.qrc \
-    source.qrc \
-    source.qrc
+    sour.qrc
 
 DISTFILES += \
     source/autentificeation.jpg

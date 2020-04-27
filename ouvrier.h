@@ -3,6 +3,8 @@
 #include <QString>
 #include <QSqlQuery>
 #include <QSqlQueryModel>
+#include <QtCore>
+#include <QtGui>
 
 class ouvrier
 {
@@ -18,7 +20,7 @@ public:
     int getsalaire();
     int getnumtel();
     bool ajouter();
-    QSqlQueryModel * afficher();
+    QStandardItemModel* afficher(QObject* parent);
      QSqlQueryModel * afficher_cin();
     bool supprimer(int);
     bool modifier(int);

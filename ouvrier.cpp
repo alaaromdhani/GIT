@@ -53,10 +53,45 @@ bool ouvrier::ajouter(){
 
    return query.exec();
 }
-QSqlQueryModel * ouvrier::afficher(){
+QStandardItemModel* ouvrier::afficher(QObject* parent){
 
-    QSqlQueryModel *model=new QSqlQueryModel();
-    model->setQuery("select * from mycrud;");
+
+    QSqlQuery q;
+    q.prepare("select * from mycrud;");
+     int i=0;
+     if(q.exec()){
+         while(q.next()){
+             for(int col=0; col<6 ; col++){
+                 QString a=q.value(i).toString();
+
+             }
+
+
+
+             i++;
+         }
+     }
+
+      QStandardItemModel* model =new QStandardItemModel(i,6,parent);
+  // QSqlQueryModel *model1=new QSqlQueryModel();
+
+    //QStandardItemModel* model =new QStandardItemModel(4,2,this);
+
+    q.prepare("select * from mycrud");
+     i=0;
+     if(q.exec()){
+         while(q.next()){
+             for(int col=0; col<6 ; col++){
+                 QString a=q.value(col).toString();
+                 QModelIndex index=model->index(i,col,QModelIndex());
+                 model->setData(index,a);
+             }
+
+
+
+             i++;
+         }
+     }
    return model;
 
 

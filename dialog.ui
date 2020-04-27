@@ -438,6 +438,58 @@ color: #a9b7c6;</string>
        <string>hg</string>
       </property>
      </widget>
+     <widget class="QLabel" name="label_11">
+      <property name="geometry">
+       <rect>
+        <x>580</x>
+        <y>40</y>
+        <width>47</width>
+        <height>14</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>TextLabel</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_12">
+      <property name="geometry">
+       <rect>
+        <x>550</x>
+        <y>20</y>
+        <width>47</width>
+        <height>14</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>TextLabel</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_13">
+      <property name="geometry">
+       <rect>
+        <x>570</x>
+        <y>70</y>
+        <width>47</width>
+        <height>14</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>TextLabel</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_14">
+      <property name="geometry">
+       <rect>
+        <x>530</x>
+        <y>90</y>
+        <width>47</width>
+        <height>14</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>TextLabel</string>
+      </property>
+     </widget>
     </widget>
    </widget>
    <widget class="QWidget" name="tab_2">
@@ -797,7 +849,7 @@ font-size: 18px;
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">color:#333</string>
+       <string notr="true">color:black;</string>
       </property>
       <property name="text">
        <string>TextLabel</string>
@@ -806,14 +858,14 @@ font-size: 18px;
      <widget class="QLabel" name="label_9">
       <property name="geometry">
        <rect>
-        <x>610</x>
+        <x>480</x>
         <y>40</y>
         <width>47</width>
         <height>14</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">color:#333;</string>
+       <string notr="true">color:black;</string>
       </property>
       <property name="text">
        <string>TextLabel</string>
@@ -827,6 +879,9 @@ font-size: 18px;
         <width>47</width>
         <height>14</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color : black;</string>
       </property>
       <property name="text">
        <string>TextLabel</string>
@@ -1055,6 +1110,220 @@ font-size: 18px;
 color: #a9b7c6;
 }
 #pushButton_9:hover{
+border-style: solid;
+	border-top-color: transparent;
+	border-right-color: transparent;
+	border-left-color: transparent;
+	border-bottom-color: #e67e22;
+	border-bottom-width: 1px;
+	border-bottom-radius: 6px;
+	border-style: solid;
+	color: #FFFFFF;
+	padding-bottom: 2px;
+	background-color: green;
+}</string>
+      </property>
+      <property name="text">
+       <string>send</string>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab_4">
+    <attribute name="title">
+     <string>sms</string>
+    </attribute>
+    <widget class="QFrame" name="frame_4">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>-1</y>
+       <width>801</width>
+       <height>391</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: #333;
+border-radius:15px;
+</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <widget class="QLineEdit" name="lineEdit_14">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>40</y>
+        <width>281</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border-width: 1px; border-radius: 4px;
+font-size: 18px;
+	border-color: rgb(58, 58, 58);
+	border-style: inset;
+	padding: 0 8px;
+	color: #a9b7c6;
+	background:gray;
+	selection-background-color:#007b50;
+	selection-color: #FFFFFF;</string>
+      </property>
+      <property name="text">
+       <string>smtp.gmail.com</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_15">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>70</y>
+        <width>281</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border-width: 1px; border-radius: 4px;
+font-size: 18px;
+	border-color: rgb(58, 58, 58);
+	border-style: inset;
+	padding: 0 8px;
+	color: #a9b7c6;
+	background:gray;
+	selection-background-color:#007b50;
+	selection-color: #FFFFFF;</string>
+      </property>
+      <property name="text">
+       <string>587</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_16">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>100</y>
+        <width>281</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border-width: 1px; border-radius: 4px;
+font-size: 18px;
+	border-color: rgb(58, 58, 58);
+	border-style: inset;
+	padding: 0 8px;
+	color: #a9b7c6;
+	background:gray;
+	selection-background-color:#007b50;
+	selection-color: #FFFFFF;</string>
+      </property>
+      <property name="placeholderText">
+       <string>sender</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_17">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>130</y>
+        <width>281</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border-width: 1px; border-radius: 4px;
+font-size: 18px;
+	border-color: rgb(58, 58, 58);
+	border-style: inset;
+	padding: 0 8px;
+	color: #a9b7c6;
+	background:gray;
+	selection-background-color:#007b50;
+	selection-color: #FFFFFF;</string>
+      </property>
+      <property name="echoMode">
+       <enum>QLineEdit::Password</enum>
+      </property>
+      <property name="readOnly">
+       <bool>false</bool>
+      </property>
+      <property name="placeholderText">
+       <string>password</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_18">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>160</y>
+        <width>281</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border-width: 1px; border-radius: 4px;
+font-size: 18px;
+	border-color: rgb(58, 58, 58);
+	border-style: inset;
+	padding: 0 8px;
+	color: #a9b7c6;
+	background:gray;
+	selection-background-color:#007b50;
+	selection-color: #FFFFFF;</string>
+      </property>
+      <property name="placeholderText">
+       <string>receptiant : number@vmob.com</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEdit_19">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>190</y>
+        <width>381</width>
+        <height>101</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border-width: 1px; border-radius: 4px;
+font-size: 18px;
+	border-color: rgb(58, 58, 58);
+	border-style: inset;
+	padding: 0 8px;
+	color: #a9b7c6;
+	background:gray;
+	selection-background-color:#007b50;
+	selection-color: #FFFFFF;</string>
+      </property>
+      <property name="placeholderText">
+       <string>message</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_10">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>300</y>
+        <width>411</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">#pushButton_10{
+
+background-color: red;
+border-radius: 4px;
+	border-color: rgb(58, 58, 58);
+	border-style: inset;
+font-family: century gothic;
+font-size: 18px;
+color: #a9b7c6;
+}
+#pushButton_10:hover{
 border-style: solid;
 	border-top-color: transparent;
 	border-right-color: transparent;

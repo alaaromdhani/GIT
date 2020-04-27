@@ -23,6 +23,7 @@ public:
     QSqlQueryModel * afficher();
      QSqlQueryModel * afficher_cin();
     bool supprimer(int);
+    bool modifier(int);
 
 
 };
